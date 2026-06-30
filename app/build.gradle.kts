@@ -16,8 +16,6 @@ android {
     compileSdk = 37
 
     val abis = listOf("arm64-v8a", "x86_64")
-    val cmakeVersion = "4.1.2"
-    ndkVersion = "29.0.14206865"
 
     defaultConfig {
         applicationId = appId
@@ -110,7 +108,6 @@ android {
 
     externalNativeBuild {
         cmake {
-            version = cmakeVersion
             path = file("src/main/cpp/CMakeLists.txt")
         }
     }
