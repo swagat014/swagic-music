@@ -41,11 +41,11 @@ jobs:
 
       - name: Locate APKs
         run: |
-          find app/build/ -name "*.apk" > apk_paths.txt
+          find . -name "*.apk" > apk_paths.txt
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apk_paths.txt
-          git commit -m "chore: save apk paths [skip ci]" || true
+          git add apk_paths.txt build_log.txt
+          git commit -m "chore: save apk paths and logs [skip ci]" || true
           git push origin main || true
 
       - name: Commit and Push Build Logs on Failure
