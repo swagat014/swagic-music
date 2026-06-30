@@ -54,16 +54,14 @@ jobs:
           tag_name: latest
           name: "Latest Swagic Music Build"
           body: |
-            This is the latest automated build of Swagic Music.
+            **Scan the QR code below to download the ARM64 APK directly on your phone:**
             
-            **Scan the QR code below to download it directly on your phone:**
+            ![Download QR Code](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com/${{ github.repository }}/releases/latest/download/app-arm64-v8a-debug.apk)
             
-            ![Download QR Code](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com/${{ github.repository }}/releases/latest/download/app-debug.apk)
-            
-            *Direct Link: [app-debug.apk](https://github.com/${{ github.repository }}/releases/latest/download/app-debug.apk)*
+            *Direct Link: [app-arm64-v8a-debug.apk](https://github.com/${{ github.repository }}/releases/latest/download/app-arm64-v8a-debug.apk)*
           draft: false
           prerelease: true
           files: |
-            app/build/outputs/apk/debug/app-debug.apk
+            app/build/outputs/apk/debug/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
