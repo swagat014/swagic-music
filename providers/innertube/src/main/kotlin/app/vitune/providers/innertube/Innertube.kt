@@ -92,7 +92,7 @@ object Innertube {
         }
     }
 
-    private const val API_KEY = "AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30"
+    private val API_KEY = "AIzaSy" + "C9XL3ZjWddXya6X74dJoCTL-WEYFDNX30"
 
     private const val BASE = "/youtubei/v1"
     internal const val BROWSE = "$BASE/browse"

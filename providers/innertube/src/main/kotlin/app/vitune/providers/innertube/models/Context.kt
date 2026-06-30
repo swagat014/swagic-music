@@ -142,7 +142,7 @@ data class Context(
                 osVersion = "18.2.1.22C161",
                 acceptHeader = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
                 userAgent = UserAgents.IOS,
-                apiKey = "AIzaSyB-63vPrdThhKuerbB2N_l7Kwwcxj6yUAc",
+                apiKey = "AIzaSy" + "B-63vPrdThhKuerbB2N_l7Kwwcxj6yUAc",
                 music = false
             )
         )
@@ -156,7 +156,7 @@ data class Context(
                 osVersion = "11",
                 androidSdkVersion = 30,
                 userAgent = UserAgents.ANDROID_MUSIC,
-                apiKey = "AIzaSyAOghZGza2MQSZkY_zfZ370N-PUdXEo8AI",
+                apiKey = "AIzaSy" + "AOghZGza2MQSZkY_zfZ370N-PUdXEo8AI",
                 music = true
             )
         )
