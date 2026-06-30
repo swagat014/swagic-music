@@ -1,0 +1,117 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/home/runner/.gradle/wrapper/dists/gradle-9.5.1-all/3mo7ofu40rhxhyro6vr9xd6jp/gradle-9.5.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+Type-safe project accessors is an incubating feature.
+> Task :ktor-client-brotli:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:common:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:github:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:github:processResources NO-SOURCE
+> Task :providers:innertube:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:innertube:processResources NO-SOURCE
+> Task :providers:kugou:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:kugou:processResources NO-SOURCE
+> Task :providers:lrclib:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:lrclib:processResources NO-SOURCE
+> Task :providers:piped:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:piped:processResources NO-SOURCE
+> Task :providers:sponsorblock:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:sponsorblock:processResources NO-SOURCE
+> Task :providers:translate:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:translate:processResources NO-SOURCE
+> Task :compose:persist:preBuild UP-TO-DATE
+> Task :compose:persist:preDebugBuild UP-TO-DATE
+> Task :compose:persist:extractDebugSupportedLocales FROM-CACHE
+> Task :compose:preferences:preBuild UP-TO-DATE
+> Task :compose:preferences:preDebugBuild UP-TO-DATE
+> Task :compose:preferences:extractDebugSupportedLocales FROM-CACHE
+> Task :compose:reordering:preBuild UP-TO-DATE
+> Task :compose:reordering:preDebugBuild UP-TO-DATE
+> Task :compose:reordering:extractDebugSupportedLocales FROM-CACHE
+> Task :compose:routing:preBuild UP-TO-DATE
+> Task :compose:routing:preDebugBuild UP-TO-DATE
+> Task :compose:routing:extractDebugSupportedLocales FROM-CACHE
+> Task :core:data:preBuild UP-TO-DATE
+> Task :core:data:preDebugBuild UP-TO-DATE
+> Task :core:data:extractDebugSupportedLocales FROM-CACHE
+> Task :core:material-compat:preBuild UP-TO-DATE
+> Task :core:material-compat:preDebugBuild UP-TO-DATE
+> Task :core:material-compat:extractDebugSupportedLocales FROM-CACHE
+> Task :core:ui:preBuild UP-TO-DATE
+> Task :core:ui:preDebugBuild UP-TO-DATE
+> Task :core:ui:extractDebugSupportedLocales FROM-CACHE
+> Task :compose:persist:processDebugNavigationResources FROM-CACHE
+> Task :compose:preferences:processDebugNavigationResources FROM-CACHE
+> Task :ktor-client-brotli:compileKotlin FROM-CACHE
+> Task :providers:common:compileKotlin FROM-CACHE
+> Task :compose:reordering:processDebugNavigationResources FROM-CACHE
+> Task :providers:common:compileJava NO-SOURCE
+> Task :ktor-client-brotli:compileJava NO-SOURCE
+> Task :providers:common:processResources NO-SOURCE
+> Task :providers:common:classes UP-TO-DATE
+> Task :ktor-client-brotli:processResources NO-SOURCE
+> Task :ktor-client-brotli:classes UP-TO-DATE
+> Task :compose:routing:processDebugNavigationResources FROM-CACHE
+> Task :core:data:processDebugNavigationResources FROM-CACHE
+> Task :core:material-compat:processDebugNavigationResources FROM-CACHE
+> Task :core:ui:processDebugNavigationResources FROM-CACHE
+> Task :compose:persist:generateDebugResources FROM-CACHE
+> Task :compose:persist:packageDebugResources FROM-CACHE
+> Task :providers:common:jar
+> Task :ktor-client-brotli:jar
+> Task :providers:github:compileKotlin FROM-CACHE
+> Task :providers:github:compileJava NO-SOURCE
+> Task :providers:github:classes UP-TO-DATE
+> Task :providers:github:jar
+> Task :providers:kugou:compileKotlin FROM-CACHE
+> Task :providers:kugou:compileJava NO-SOURCE
+> Task :providers:kugou:classes UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :providers:kugou:jar
+> Task :providers:innertube:compileKotlin FROM-CACHE
+> Task :providers:innertube:compileJava NO-SOURCE
+> Task :providers:innertube:classes UP-TO-DATE
+> Task :providers:lrclib:compileKotlin FROM-CACHE
+> Task :providers:lrclib:compileJava NO-SOURCE
+> Task :providers:lrclib:classes UP-TO-DATE
+> Task :providers:piped:compileKotlin FROM-CACHE
+> Task :providers:lrclib:jar
+> Task :providers:piped:compileJava NO-SOURCE
+> Task :providers:piped:classes UP-TO-DATE
+> Task :compose:persist:parseDebugLocalResources FROM-CACHE
+> Task :providers:piped:jar
+> Task :app:generateDebugBuildConfig FROM-CACHE
+> Task :app:extractDebugPythonBuildPackages
+> Task :app:installDebugPythonRequirements FAILED
+> Task :providers:translate:compileKotlin FROM-CACHE
+> Task :providers:sponsorblock:compileKotlin FROM-CACHE
+> Task :providers:innertube:jar
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1782843766207.json
+
+[Incubating] Problems report is available at: file:///home/runner/work/swagic-music/swagic-music/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:installDebugPythonRequirements' (registered by plugin 'com.chaquo.python').
+> Couldn't find Python 3.14. See https://chaquo.com/chaquopy/doc/current/android.html#buildpython.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 23s
+36 actionable tasks: 9 executed, 27 from cache
