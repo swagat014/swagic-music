@@ -49,9 +49,9 @@ jobs:
             
             **Scan the QR code below to download it directly on your phone:**
             
-            ![Download QR Code](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com/${{ github.repository }}/releases/latest/download/app-debug.apk)
+            ![Download QR Code](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com/${{ github.repository }}/releases/download/latest/app-debug.apk)
             
-            *Direct Link: [app-debug.apk](https://github.com/${{ github.repository }}/releases/latest/download/app-debug.apk)*
+            *Direct Link: [app-debug.apk](https://github.com/${{ github.repository }}/releases/download/latest/app-debug.apk)*
           draft: false
           prerelease: true
           fail_on_unmatched_files: true
