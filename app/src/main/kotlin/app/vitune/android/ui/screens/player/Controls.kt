@@ -366,7 +366,7 @@ private fun PlayButton(
             .clip(radius.roundedShape)
             .clickable {
                 if (shouldBePlaying) binder?.player?.pause() else {
-                    if (binder?.player?.playbackState == Player.STATE_IDLE) binder.player.prepare()
+                    if (binder?.player?.playbackState == Player.STATE_IDLE) binder?.player?.prepare()
                     binder?.player?.play()
                 }
             }
