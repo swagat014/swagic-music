@@ -228,7 +228,17 @@ private fun ClassicControls(
             )
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(0.5f))
+
+        // Dedicated Synced Lyrics Toggle Button
+        IconButton(
+            icon = R.drawable.musical_notes,
+            color = if (isShowingLyrics) colorPalette.accent else colorPalette.textSecondary,
+            onClick = { isShowingLyrics = !isShowingLyrics },
+            modifier = Modifier.size(24.dp)
+        )
+
+        Spacer(modifier = Modifier.weight(0.5f))
     }
 }
 
@@ -315,7 +325,17 @@ private fun ModernControls(
             )
         }
 
-        Spacer(modifier = Modifier.weight(1.5f))
+        Spacer(modifier = Modifier.weight(0.5f))
+
+        // Dedicated Synced Lyrics Toggle Button
+        IconButton(
+            icon = R.drawable.musical_notes,
+            color = if (isShowingLyrics) colorPalette.accent else colorPalette.textSecondary,
+            onClick = { isShowingLyrics = !isShowingLyrics },
+            modifier = Modifier.size(24.dp)
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
     }
 }
 

@@ -1,7 +1,7 @@
 <div align="center">
-    <img src="./app/src/main/ic_launcher-playstore.png" width="128" height="128" style="display: block; margin: 0 auto"/>
-    <h1>ViTune</h1>
-    <p>An Android application for seamless music streaming</p>
+    <img src="./app/src/main/ic_launcher-playstore.png" width="128" height="128" style="display: block; margin: 0 auto; border-radius: 28px;"/>
+    <h1>Swag Music</h1>
+    <p>A premium Android application for seamless music streaming from YouTube Music</p>
 </div>
 
 ---
@@ -10,59 +10,41 @@
   <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="30%" />
   <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="30%" />
   <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="30%" />
-
-  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="30%" />
-  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="30%" />
-  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="30%" />
 </p>
 
 ## Features
 
-- Play (almost) any song or video from YouTube Music
-- Play music from your device
-- Play songs in the background
-- Cache song for offline playback
-- Search for songs, albums, artists videos and playlists
-- Discover new songs by mood/genre
-- Import playlists from YouTube
-- Fetch, display and edit songs lyrics or synchronized lyrics
-- Manage your playlists locally or synchronize with the cloud
-- Highly customizable (dynamic theme, Material You, ...)
-- Normalize audio for the perfect listening experience
-- Listen from your car using Android Auto
-- Open YouTube/YouTube Music links (`watch`, `playlist`, `channel`, etc.) with ViTune
-- Ridiculously lightweight APK
+- **Neon Dark & Purple UI**: Premium, high-contrast visual design system.
+- **Ambient Glow Player**: Music player featuring dynamic background glow matching track artwork.
+- **Floating Navigation Bar**: Fluid and responsive bottom navigation bar layout.
+- **Direct YouTube Streaming**: Stream (almost) any song or video from YouTube Music.
+- **On-Device yt-dlp & QuickJS**: High-performance local signature cipher resolving.
+- **Synced Scrolling Lyrics**: Real-time lyrics matching playback position automatically.
+- **Offline Caching**: Save and cache tracks for offline playback.
+- **Equalizer & Normalization**: Built-in sound adjustment settings.
+- **Android Auto Support**: Seamless dashboard playback for cars and scooters.
+
+---
 
 ## Installation
 
-[<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png"
-alt="Get it on GitHub"
-height="80"
-align="center">](https://github.com/25huizengek1/ViTune/releases/latest)
+### Direct GitHub Download (Recommended)
+You can download the latest compiled version of the app directly from our releases:
 
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-alt="Get it on F-Droid"
-height="80"
-align="center">](https://repo.vitune.app/)
+👉 **[Download Latest Swag Music APK](https://github.com/swagat014/swagic-music/releases/download/latest/app-debug.apk)**
 
-[<img src="https://github.com/ImranR98/Obtainium/blob/main/assets/graphics/badge_obtainium.png"
-alt="Get it on Obtainium"
-height="54"
-align="center">](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/25huizengek1/ViTune/)
+*Alternative badge download:*
+[<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80" align="center">](https://github.com/swagat014/swagic-music/releases/latest)
 
-## Acknowledgments
+### Play Protect Warning Note
+Because this app is sideloaded directly from the browser (outside Google Play Store) and signed with a local developer certificate, Android may show a **"Blocked by Play Protect"** or **"Unsafe App Blocked"** warning.
 
-- [**YouTube-Internal-Clients**](https://github.com/zerodytrash/YouTube-Internal-Clients): A Python
-  script that discovers hidden YouTube API clients. Just a research project.
-- [**ionicons**](https://github.com/ionic-team/ionicons): Premium hand-crafted icons built by Ionic,
-  for Ionic apps and web apps everywhere.
-- [**Flaticon: Ilham Fitrotul Hayat**](https://www.flaticon.com/authors/ilham-fitrotul-hayat): the
-  app's logo uses a music note icon.
+To install:
+1. Tap **"More details"** in the installation prompt.
+2. Tap **"Install anyway"** to complete the setup.
+
+---
 
 ## Disclaimer
 
-This project and its contents are not affiliated with, funded, authorized, endorsed by, or in any
-way associated with YouTube, Google LLC or any of its affiliates and subsidiaries.
-
-Any trademark, service mark, trade name, or other intellectual property rights used in this project
-are owned by the respective owners.
+This project is not affiliated with, authorized, or endorsed by YouTube, Google LLC, or any of its subsidiaries.

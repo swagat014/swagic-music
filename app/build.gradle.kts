@@ -62,14 +62,14 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
-            manifestPlaceholders["appName"] = "Swagic Music Debug"
+            manifestPlaceholders["appName"] = "Swag Music"
         }
 
         release {
             versionNameSuffix = "-RELEASE"
             isMinifyEnabled = true
             isShrinkResources = true
-            manifestPlaceholders["appName"] = "Swagic Music"
+            manifestPlaceholders["appName"] = "Swag Music"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -82,7 +82,7 @@ android {
 
             applicationIdSuffix = ".nightly"
             versionNameSuffix = "-NIGHTLY"
-            manifestPlaceholders["appName"] = "Swagic Music Nightly"
+            manifestPlaceholders["appName"] = "Swag Music"
             signingConfig = signingConfigs.findByName("ci")
         }
     }

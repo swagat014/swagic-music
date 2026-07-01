@@ -149,10 +149,38 @@ fun String?.thumbnail(
     size: Int,
     maxSize: Int = AppearancePreferences.maxThumbnailSize
 ): String? {
+    if (this == null) return null
     val actualSize = size.coerceAtMost(maxSize)
+    
+    // 1. Check if the URL already contains sizing parameters (e.g. "=wXXX-hXXX" or "-wXXX-hXXX")
+    if (contains("=w") || contains("-w")) {
+        val replaced = replace(Regex("=[whs0-9-]+$"), "=w$actualSize-h$actualSize-rj")
+        if (replaced != this) return replaced
+        
+        val replacedDash = replace(Regex("-w[0-9]+-h[0-9]+(-s[0-9]+)?$"), "-w$actualSize-h$actualSize")
+        if (replacedDash != this) return replacedDash
+    }
+    
+    // 2. Base domain rewriting
     return when {
-        this?.startsWith("https://lh3.googleusercontent.com") == true -> "$this-w$actualSize-h$actualSize"
-        this?.startsWith("https://yt3.ggpht.com") == true -> "$this-w$actualSize-h$actualSize-s$actualSize"
+        startsWith("https://lh3.googleusercontent.com") == true -> {
+            if (contains("=")) {
+                substringBeforeLast("=") + "=w$actualSize-h$actualSize-rj"
+            } else {
+                "$this=w$actualSize-h$actualSize-rj"
+            }
+        }
+        startsWith("https://yt3.ggpht.com") == true -> {
+            if (contains("=")) {
+                substringBeforeLast("=") + "=s$actualSize-c-k-c0x00ffffff-no-rj"
+            } else {
+                "$this=s$actualSize-c-k-c0x00ffffff-no-rj"
+            }
+        }
+        // 3. YouTube video thumbnails (e.g. default.jpg, mqdefault.jpg) -> replace with maxresdefault.jpg
+        contains("i.ytimg.com/vi/") -> {
+            replace(Regex("/(default|mqdefault|hqdefault|sddefault)\\.jpg$"), "/maxresdefault.jpg")
+        }
         else -> this
     }
 }
