@@ -36,7 +36,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
@@ -162,6 +167,24 @@ fun Thumbnail(
         if (currentWindow != null) Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .drawBehind {
+                    if (!isInPip) {
+                        val glowWidth = size.width * 1.08f
+                        val glowHeight = size.height * 1.08f
+                        drawRoundRect(
+                            brush = Brush.radialGradient(
+                                colors = listOf(
+                                    colorPalette.accent.copy(alpha = 0.24f),
+                                    Color.Transparent
+                                ),
+                                center = Offset(size.width / 2f, size.height / 2f),
+                                radius = size.width * 0.65f
+                            ),
+                            topLeft = Offset((size.width - glowWidth) / 2f, (size.height - glowHeight) / 2f),
+                            size = Size(glowWidth, glowHeight)
+                        )
+                    }
+                }
                 .clip(if (isInPip) RectangleShape else thumbnailShape)
                 .shadow(
                     elevation = shadowElevation,

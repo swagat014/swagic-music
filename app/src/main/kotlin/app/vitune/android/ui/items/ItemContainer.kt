@@ -15,6 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.vitune.core.ui.Dimensions
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.RoundedCornerShape
+import app.vitune.core.ui.LocalAppearance
 
 @Composable
 fun ItemContainer(
@@ -34,16 +38,29 @@ fun ItemContainer(
             .padding(Dimensions.items.alternativePadding)
             .width(thumbnailSize)
     ) { content(Modifier.align(Alignment.CenterHorizontally)) }
-    else Row(
-        verticalAlignment = verticalAlignment,
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        modifier = modifier
-            .padding(
-                vertical = Dimensions.items.verticalPadding,
-                horizontal = Dimensions.items.horizontalPadding
-            )
-            .fillMaxWidth()
-    ) { content(Modifier.align(Alignment.CenterVertically)) }
+    else {
+        val (colorPalette) = LocalAppearance.current
+        Row(
+            verticalAlignment = verticalAlignment,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = modifier
+                .padding(vertical = 4.dp, horizontal = 12.dp)
+                .background(
+                    color = colorPalette.background1.copy(alpha = 0.45f),
+                    shape = RoundedCornerShape(14.dp)
+                )
+                .border(
+                    width = 1.dp,
+                    color = colorPalette.accent.copy(alpha = 0.12f),
+                    shape = RoundedCornerShape(14.dp)
+                )
+                .padding(
+                    vertical = Dimensions.items.verticalPadding + 2.dp,
+                    horizontal = Dimensions.items.horizontalPadding + 4.dp
+                )
+                .fillMaxWidth()
+        ) { content(Modifier.align(Alignment.CenterVertically)) }
+    }
 }
 
 @Composable

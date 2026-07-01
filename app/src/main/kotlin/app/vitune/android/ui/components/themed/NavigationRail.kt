@@ -60,6 +60,10 @@ import app.vitune.core.ui.Dimensions
 import app.vitune.core.ui.LocalAppearance
 import app.vitune.core.ui.utils.isLandscape
 import app.vitune.core.ui.utils.roundedShape
+import androidx.compose.foundation.border
+import androidx.compose.ui.graphics.Color
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.ui.draw.shadow
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.parcelize.IgnoredOnParcel
@@ -234,110 +238,172 @@ inline fun NavigationRail(
         }
     }
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .verticalScroll(rememberScrollState())
-            .padding(paddingValues)
-    ) {
-        Box(
-            contentAlignment = Alignment.TopCenter,
-            modifier = Modifier
-                .size(
-                    width = if (isLandscape) Dimensions.navigationRail.widthLandscape
-                    else Dimensions.navigationRail.width,
-                    height = Dimensions.items.headerHeight
-                )
-        ) {
-            Image(
-                painter = painterResource(topIconButtonId),
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(colorPalette.textSecondary),
-                modifier = Modifier
-                    .offset(
-                        x = if (isLandscape) 0.dp else Dimensions.navigationRail.iconOffset,
-                        y = 48.dp
-                    )
-                    .clip(CircleShape)
-                    .clickable(onClick = onTopIconButtonClick)
-                    .padding(all = 12.dp)
-                    .size(22.dp)
-            )
-        }
-
+    if (isLandscape) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.width(
-                if (isLandscape) Dimensions.navigationRail.widthLandscape
-                else Dimensions.navigationRail.width
-            )
+            modifier = modifier
+                .verticalScroll(rememberScrollState())
+                .padding(paddingValues)
         ) {
-            val transition = updateTransition(targetState = tabIndex, label = null)
+            Box(
+                contentAlignment = Alignment.TopCenter,
+                modifier = Modifier
+                    .size(
+                        width = Dimensions.navigationRail.widthLandscape,
+                        height = Dimensions.items.headerHeight
+                    )
+            ) {
+                Image(
+                    painter = painterResource(topIconButtonId),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(colorPalette.textSecondary),
+                    modifier = Modifier
+                        .offset(y = 48.dp)
+                        .clip(CircleShape)
+                        .clickable(onClick = onTopIconButtonClick)
+                        .padding(all = 12.dp)
+                        .size(22.dp)
+                )
+            }
 
-            tabs.fastForEachIndexed { index, tab ->
-                AnimatedVisibility(
-                    visible = tabIndex == index || tab.key !in hiddenTabs,
-                    label = ""
-                ) {
-                    val dothAlpha by transition.animateFloat(label = "") {
-                        if (it == index) 1f else 0f
-                    }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.width(Dimensions.navigationRail.widthLandscape)
+            ) {
+                val transition = updateTransition(targetState = tabIndex, label = null)
 
-                    val textColor by transition.animateColor(label = "") {
-                        if (it == index) colorPalette.text else colorPalette.textDisabled
-                    }
-
-                    val iconContent: @Composable () -> Unit = {
-                        Image(
-                            painter = painterResource(tab.icon),
-                            contentDescription = null,
-                            colorFilter = ColorFilter.tint(colorPalette.text),
-                            modifier = Modifier
-                                .vertical(enabled = !isLandscape)
-                                .graphicsLayer {
-                                    alpha = dothAlpha
-                                    translationX = (1f - dothAlpha) * -48.dp.toPx()
-                                    rotationZ = if (isLandscape) 0f else -90f
-                                }
-                                .size(Dimensions.navigationRail.iconOffset * 2)
-                        )
-                    }
-
-                    val textContent: @Composable () -> Unit = {
-                        BasicText(
-                            text = tab.title(),
-                            style = typography.xs.semiBold.center.color(textColor),
-                            modifier = Modifier
-                                .vertical(enabled = !isLandscape)
-                                .rotate(if (isLandscape) 0f else -90f)
-                                .padding(horizontal = 16.dp),
-                            overflow = TextOverflow.Ellipsis,
-                            maxLines = 2
-                        )
-                    }
-
-                    val contentModifier = Modifier
-                        .clip(24.dp.roundedShape)
-                        .combinedClickable(
-                            onClick = { onTabIndexChange(index) },
-                            onLongClick = { editing = true }
-                        )
-
-                    if (isLandscape) Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = contentModifier
-                            .padding(vertical = 8.dp)
-                            .fillMaxWidth()
+                tabs.fastForEachIndexed { index, tab ->
+                    AnimatedVisibility(
+                        visible = tabIndex == index || tab.key !in hiddenTabs,
+                        label = ""
                     ) {
-                        iconContent()
-                        textContent()
-                    } else Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = contentModifier.padding(horizontal = 8.dp)
-                    ) {
-                        iconContent()
-                        textContent()
+                        val dothAlpha by transition.animateFloat(label = "") {
+                            if (it == index) 1f else 0f
+                        }
+
+                        val textColor by transition.animateColor(label = "") {
+                            if (it == index) colorPalette.text else colorPalette.textDisabled
+                        }
+
+                        val iconContent: @Composable () -> Unit = {
+                            Image(
+                                painter = painterResource(tab.icon),
+                                contentDescription = null,
+                                colorFilter = ColorFilter.tint(colorPalette.text),
+                                modifier = Modifier
+                                    .graphicsLayer {
+                                        alpha = dothAlpha
+                                        translationX = (1f - dothAlpha) * -48.dp.toPx()
+                                    }
+                                    .size(Dimensions.navigationRail.iconOffset * 2)
+                            )
+                        }
+
+                        val textContent: @Composable () -> Unit = {
+                            BasicText(
+                                text = tab.title(),
+                                style = typography.xs.semiBold.center.color(textColor),
+                                modifier = Modifier.padding(horizontal = 16.dp),
+                                overflow = TextOverflow.Ellipsis,
+                                maxLines = 2
+                            )
+                        }
+
+                        val contentModifier = Modifier
+                            .clip(24.dp.roundedShape)
+                            .combinedClickable(
+                                onClick = { onTabIndexChange(index) },
+                                onLongClick = { editing = true }
+                            )
+
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = contentModifier
+                                .padding(vertical = 8.dp)
+                                .fillMaxWidth()
+                        ) {
+                            iconContent()
+                            textContent()
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        // Floating glassmorphism Bottom Navigation Bar in Portrait mode
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 14.dp, vertical = 12.dp)
+                .background(
+                    color = colorPalette.background1.copy(alpha = 0.82f),
+                    shape = RoundedCornerShape(26.dp)
+                )
+                .border(
+                    width = 1.dp,
+                    color = colorPalette.accent.copy(alpha = 0.22f),
+                    shape = RoundedCornerShape(26.dp)
+                )
+                .padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                tabs.fastForEachIndexed { index, tab ->
+                    if (tab.key !in hiddenTabs || tabIndex == index) {
+                        val isSelected = tabIndex == index
+                        val activeColor = colorPalette.accent
+                        val inactiveColor = colorPalette.textDisabled
+
+                        val scale by animateFloatAsState(
+                            targetValue = if (isSelected) 1.22f else 1.0f,
+                            label = ""
+                        )
+
+                        val iconColor = if (isSelected) activeColor else inactiveColor
+
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .combinedClickable(
+                                    onClick = { onTabIndexChange(index) },
+                                    onLongClick = { editing = true }
+                                )
+                                .padding(vertical = 6.dp, horizontal = 12.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(tab.icon),
+                                contentDescription = null,
+                                colorFilter = ColorFilter.tint(iconColor),
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .graphicsLayer {
+                                        scaleX = scale
+                                        scaleY = scale
+                                    }
+                            )
+
+                            Spacer(modifier = Modifier.height(5.dp))
+
+                            Box(
+                                modifier = Modifier
+                                    .size(5.dp)
+                                    .background(
+                                        color = if (isSelected) activeColor else Color.Transparent,
+                                        shape = CircleShape
+                                    )
+                                    .shadow(
+                                        elevation = if (isSelected) 4.dp else 0.dp,
+                                        shape = CircleShape,
+                                        clip = false
+                                    )
+                            )
+                        }
                     }
                 }
             }

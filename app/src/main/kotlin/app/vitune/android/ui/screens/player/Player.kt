@@ -48,6 +48,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
@@ -359,10 +360,26 @@ fun Player(
             .clip(shape)
             .background(
                 Brush.verticalGradient(
-                    0.5f to colorPalette.background1,
+                    0.4f to colorPalette.background1,
                     1f to colorPalette.background0
                 )
             )
+            .drawBehind {
+                val glowRadius = 420.dp.toPx()
+                val glowCenter = Offset(x = size.width / 2f, y = size.height * 0.28f)
+                drawCircle(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            colorPalette.accent.copy(alpha = 0.28f),
+                            Color.Transparent
+                        ),
+                        center = glowCenter,
+                        radius = glowRadius
+                    ),
+                    center = glowCenter,
+                    radius = glowRadius
+                )
+            }
             .padding(
                 windowInsets
                     .only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)

@@ -42,6 +42,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.foundation.border
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
@@ -240,25 +243,8 @@ private fun ModernControls(
     playButtonRadius: Dp,
     modifier: Modifier = Modifier,
     controlHeight: Dp = 64.dp
-) {
-    val previousButtonContent: @Composable RowScope.() -> Unit = {
-        SkipButton(
-            iconId = R.drawable.play_skip_back,
-            onClick = binder.player::forceSeekToPrevious,
-            modifier = Modifier.weight(1f),
-            offsetOnPress = -DefaultOffset
-        )
-    }
-
-    val likeButtonContent: @Composable RowScope.() -> Unit = {
-        BigIconButton(
-            iconId = if (likedAt == null) R.drawable.heart_outline else R.drawable.heart,
-            onClick = {
-                setLikedAt(if (likedAt == null) System.currentTimeMillis() else null)
-            },
-            modifier = Modifier.weight(1f)
-        )
-    }
+) = with(PlayerPreferences) {
+    val (colorPalette) = LocalAppearance.current
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -270,43 +256,66 @@ private fun ModernControls(
         MediaInfo(media)
         Spacer(modifier = Modifier.weight(1f))
 
+        // Glowing SeekBar progress tracking (full width)
+        SeekBar(
+            binder = binder,
+            position = position,
+            media = media,
+            color = colorPalette.accent,
+            alwaysShowDuration = true
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        // Symmetric controller deck with illuminated Play/Pause circle
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(if (PlayerPreferences.showLike) 4.dp else 8.dp)
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            if (PlayerPreferences.showLike) previousButtonContent()
+            // Far Left: Loop Toggle Button
+            IconButton(
+                icon = R.drawable.infinite,
+                enabled = trackLoopEnabled,
+                onClick = { trackLoopEnabled = !trackLoopEnabled },
+                modifier = Modifier.size(24.dp)
+            )
+
+            // Inner Left: Skip Back
+            IconButton(
+                icon = R.drawable.play_skip_back,
+                color = colorPalette.text,
+                onClick = binder.player::forceSeekToPrevious,
+                modifier = Modifier.size(28.dp)
+            )
+
+            // Center: Neon Glowing Play Button
             PlayButton(
                 radius = playButtonRadius,
                 shouldBePlaying = shouldBePlaying,
-                modifier = Modifier
-                    .height(controlHeight)
-                    .weight(if (PlayerPreferences.showLike) 3f else 4f)
+                modifier = Modifier.size(76.dp)
             )
-            SkipButton(
-                iconId = R.drawable.play_skip_forward,
+
+            // Inner Right: Skip Forward
+            IconButton(
+                icon = R.drawable.play_skip_forward,
+                color = colorPalette.text,
                 onClick = binder.player::forceSeekToNext,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.size(28.dp)
+            )
+
+            // Far Right: Like Toggle Button
+            IconButton(
+                icon = if (likedAt == null) R.drawable.heart_outline else R.drawable.heart,
+                color = if (likedAt == null) colorPalette.textSecondary else colorPalette.accent,
+                onClick = {
+                    setLikedAt(if (likedAt == null) System.currentTimeMillis() else null)
+                },
+                modifier = Modifier.size(24.dp)
             )
         }
-        Spacer(modifier = Modifier.weight(1f))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            if (PlayerPreferences.showLike) likeButtonContent() else previousButtonContent()
 
-            Column(modifier = Modifier.weight(4f)) {
-                SeekBar(
-                    binder = binder,
-                    position = position,
-                    media = media
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(1.5f))
     }
 }
 
@@ -350,7 +359,7 @@ private fun PlayButton(
     Box(
         modifier = modifier
             .shadow(
-                elevation = 8.dp,
+                elevation = 12.dp,
                 shape = radius.roundedShape,
                 clip = false
             )
@@ -361,13 +370,24 @@ private fun PlayButton(
                     binder?.player?.play()
                 }
             }
-            .background(colorPalette.accent)
+            .border(
+                width = 3.dp,
+                brush = Brush.sweepGradient(
+                    colors = listOf(
+                        colorPalette.accent,
+                        Color(0xFFD600FF), // Glowing magenta-purple
+                        colorPalette.accent
+                    )
+                ),
+                shape = radius.roundedShape
+            )
+            .background(colorPalette.accent.copy(alpha = 0.16f))
     ) {
         AnimatedPlayPauseButton(
             playing = shouldBePlaying,
             modifier = Modifier
                 .align(Alignment.Center)
-                .size(32.dp)
+                .size(34.dp)
         )
     }
 }
