@@ -36,12 +36,12 @@ data class ColorPalette(
 private val defaultAccentColor = Color(0xff7f00ff).hsl
 
 val defaultLightPalette = ColorPalette(
-    background0 = Color(0xfffdfdfe),
-    background1 = Color(0xfff8f8fc),
-    background2 = Color(0xffeaeaf5),
-    text = Color(0xff212121),
-    textSecondary = Color(0xff656566),
-    textDisabled = Color(0xff9d9d9d),
+    background0 = Color(0xfffbfafd),
+    background1 = Color(0xfff3effa),
+    background2 = Color(0xffe6def4),
+    text = Color(0xff221b30),
+    textSecondary = Color(0xff75688c),
+    textDisabled = Color(0xffa99fb8),
     accent = defaultAccentColor.color,
     onAccent = Color.White,
     isDefault = true,
@@ -49,12 +49,12 @@ val defaultLightPalette = ColorPalette(
 )
 
 val defaultDarkPalette = ColorPalette(
-    background0 = Color(0xff090a0f),
-    background1 = Color(0xff11131c),
-    background2 = Color(0xff1a1d2b),
+    background0 = Color(0xff08040d),
+    background1 = Color(0xff120c1d),
+    background2 = Color(0xff1d122e),
     text = Color(0xffffffff),
-    textSecondary = Color(0xff8f9cae),
-    textDisabled = Color(0xff4e5d78),
+    textSecondary = Color(0xffa899c3),
+    textDisabled = Color(0xff57486e),
     accent = defaultAccentColor.color,
     onAccent = Color.White,
     isDefault = true,

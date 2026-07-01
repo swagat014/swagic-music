@@ -40,6 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
@@ -179,6 +180,12 @@ private fun ClassicControls(
 
             Box(
                 modifier = Modifier
+                    .shadow(
+                        elevation = 8.dp,
+                        shape = playButtonRadius.roundedShape,
+                        ambientColor = colorPalette.accent,
+                        spotColor = colorPalette.accent
+                    )
                     .clip(playButtonRadius.roundedShape)
                     .clickable {
                         if (shouldBePlaying) binder.player.pause()
@@ -187,7 +194,7 @@ private fun ClassicControls(
                             binder.player.play()
                         }
                     }
-                    .background(colorPalette.background2)
+                    .background(colorPalette.accent)
                     .size(64.dp)
             ) {
                 AnimatedPlayPauseButton(
@@ -343,6 +350,12 @@ private fun PlayButton(
 
     Box(
         modifier = modifier
+            .shadow(
+                elevation = 8.dp,
+                shape = radius.roundedShape,
+                ambientColor = colorPalette.accent,
+                spotColor = colorPalette.accent
+            )
             .clip(radius.roundedShape)
             .clickable {
                 if (shouldBePlaying) binder?.player?.pause() else {

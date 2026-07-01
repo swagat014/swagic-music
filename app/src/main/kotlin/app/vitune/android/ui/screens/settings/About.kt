@@ -7,9 +7,14 @@ import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,8 +25,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationCompat
@@ -60,8 +67,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 private val VERSION_NAME = BuildConfig.VERSION_NAME.substringBeforeLast("-")
-private const val REPO_OWNER = "25huizengek1"
-private const val REPO_NAME = "ViTune"
+private const val REPO_OWNER = "swagat014"
+private const val REPO_NAME = "swagic-music"
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 private val permission = Manifest.permission.POST_NOTIFICATIONS
@@ -169,9 +176,35 @@ fun About() = SettingsCategoryScreen(
         VERSION_NAME
     )
 ) {
-    val (_, typography) = LocalAppearance.current
+    val (colorPalette, typography) = LocalAppearance.current
     val uriHandler = LocalUriHandler.current
     val context = LocalContext.current
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(R.mipmap.ic_launcher_round),
+            contentDescription = null,
+            modifier = Modifier
+                .size(100.dp)
+                .clip(RoundedCornerShape(24.dp))
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        BasicText(
+            text = "Swagic Music",
+            style = typography.m.bold.copy(color = colorPalette.accent)
+        )
+        BasicText(
+            text = "v$VERSION_NAME",
+            style = typography.xs.semiBold.secondary
+        )
+    }
+
+    SettingsGroupSpacer()
 
     var hasPermission by remember(isCompositionLaunched()) {
         mutableStateOf(
