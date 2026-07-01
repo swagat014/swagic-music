@@ -183,8 +183,7 @@ private fun ClassicControls(
                     .shadow(
                         elevation = 8.dp,
                         shape = playButtonRadius.roundedShape,
-                        ambientColor = colorPalette.accent,
-                        spotColor = colorPalette.accent
+                        clip = false
                     )
                     .clip(playButtonRadius.roundedShape)
                     .clickable {
@@ -353,8 +352,7 @@ private fun PlayButton(
             .shadow(
                 elevation = 8.dp,
                 shape = radius.roundedShape,
-                ambientColor = colorPalette.accent,
-                spotColor = colorPalette.accent
+                clip = false
             )
             .clip(radius.roundedShape)
             .clickable {
