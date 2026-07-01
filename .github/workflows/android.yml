@@ -39,40 +39,23 @@ jobs:
       - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon 2>&1 | tee build_log.txt
 
-      - name: Locate APKs
-        run: |
-          find . -name "*.apk" > apk_paths.txt
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apk_paths.txt build_log.txt
-          git commit -m "chore: save apk paths and logs [skip ci]" || true
-          git push origin main || true
-
-      - name: Commit and Push Build Logs on Failure
-        if: failure()
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add build_log.txt
-          git commit -m "chore: add build logs for failed run [skip ci]"
-          git push origin main
-
       - name: Create or Update Pre-Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: "Latest Swagic Music Build"
           body: |
-            **Scan the QR code below to download the ARM64 APK directly on your phone:**
+            This is the latest automated build of Swagic Music.
             
-            ![Download QR Code](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com/${{ github.repository }}/releases/latest/download/app-arm64-v8a-debug.apk)
+            **Scan the QR code below to download it directly on your phone:**
             
-            *Direct Link: [app-arm64-v8a-debug.apk](https://github.com/${{ github.repository }}/releases/latest/download/app-arm64-v8a-debug.apk)*
+            ![Download QR Code](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com/${{ github.repository }}/releases/latest/download/app-debug.apk)
+            
+            *Direct Link: [app-debug.apk](https://github.com/${{ github.repository }}/releases/latest/download/app-debug.apk)*
           draft: false
           prerelease: true
           fail_on_unmatched_files: true
           files: |
-            app/build/outputs/apk/debug/arm64-v8a/app-arm64-v8a-debug.apk
-            app/build/outputs/apk/debug/x86_64/app-x86_64-debug.apk
+            app/build/outputs/apk/debug/app-debug.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
