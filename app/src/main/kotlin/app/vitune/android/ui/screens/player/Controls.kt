@@ -276,8 +276,8 @@ private fun ModernControls(
             // Far Left: Loop Toggle Button
             IconButton(
                 icon = R.drawable.infinite,
-                enabled = trackLoopEnabled,
-                onClick = { trackLoopEnabled = !trackLoopEnabled },
+                enabled = PlayerPreferences.trackLoopEnabled,
+                onClick = { PlayerPreferences.trackLoopEnabled = !PlayerPreferences.trackLoopEnabled },
                 modifier = Modifier.size(24.dp)
             )
 
