@@ -50,6 +50,7 @@ import app.vitune.android.ui.components.themed.SecondaryTextButton
 import app.vitune.android.ui.screens.Route
 import app.vitune.android.utils.bold
 import app.vitune.android.utils.center
+import app.vitune.android.utils.secondary
 import app.vitune.android.utils.hasPermission
 import app.vitune.android.utils.pendingIntent
 import app.vitune.android.utils.semiBold
