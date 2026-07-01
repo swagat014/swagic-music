@@ -38,7 +38,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon 2>&1 | tee build_log.txt
+        run: ./gradlew assembleDebug --no-daemon
 
       - name: Create or Update Pre-Release
         uses: softprops/action-gh-release@v2
