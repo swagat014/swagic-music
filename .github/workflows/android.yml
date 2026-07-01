@@ -38,12 +38,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Debug APK
-        run: |
-          ./gradlew assembleDebug --no-daemon > build.log 2>&1 || {
-            log_url=$(curl -s --data-binary @build.log https://paste.rs)
-            echo "::error::Build failed! Logs: $log_url"
-            exit 1
-          }
+        run: ./gradlew assembleDebug --no-daemon
 
       - name: Create or Update Pre-Release
         uses: softprops/action-gh-release@v2
