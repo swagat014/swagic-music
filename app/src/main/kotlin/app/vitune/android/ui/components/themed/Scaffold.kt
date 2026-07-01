@@ -59,28 +59,6 @@ fun Scaffold(
     var hiddenTabs by UIStatePreferences.mutableTabStateOf(key)
     val isLandscape = isLandscape
 
-    val animatedContent: @Composable AnimatedVisibilityScope.() -> Unit = {
-        AnimatedContent(
-            targetState = tabIndex,
-            transitionSpec = {
-                val slideDirection = if (targetState > initialState) Up else Down
-                val animationSpec = spring(
-                    dampingRatio = 0.9f,
-                    stiffness = Spring.StiffnessLow,
-                    visibilityThreshold = IntOffset.VisibilityThreshold
-                )
-
-                ContentTransform(
-                    targetContentEnter = slideIntoContainer(slideDirection, animationSpec),
-                    initialContentExit = slideOutOfContainer(slideDirection, animationSpec),
-                    sizeTransform = null
-                )
-            },
-            content = content,
-            label = ""
-        )
-    }
-
     if (isLandscape) {
         Row(
             modifier = modifier
@@ -99,7 +77,25 @@ fun Scaffold(
             )
 
             Box(modifier = Modifier.weight(1f).fillMaxSize()) {
-                animatedContent()
+                AnimatedContent(
+                    targetState = tabIndex,
+                    transitionSpec = {
+                        val slideDirection = if (targetState > initialState) Up else Down
+                        val animationSpec = spring(
+                            dampingRatio = 0.9f,
+                            stiffness = Spring.StiffnessLow,
+                            visibilityThreshold = IntOffset.VisibilityThreshold
+                        )
+
+                        ContentTransform(
+                            targetContentEnter = slideIntoContainer(slideDirection, animationSpec),
+                            initialContentExit = slideOutOfContainer(slideDirection, animationSpec),
+                            sizeTransform = null
+                        )
+                    },
+                    content = content,
+                    label = ""
+                )
             }
         }
     } else {
@@ -143,7 +139,25 @@ fun Scaffold(
                 }
 
                 Box(modifier = Modifier.weight(1f).fillMaxSize()) {
-                    animatedContent()
+                    AnimatedContent(
+                        targetState = tabIndex,
+                        transitionSpec = {
+                            val slideDirection = if (targetState > initialState) Up else Down
+                            val animationSpec = spring(
+                                dampingRatio = 0.9f,
+                                stiffness = Spring.StiffnessLow,
+                                visibilityThreshold = IntOffset.VisibilityThreshold
+                            )
+
+                            ContentTransform(
+                                targetContentEnter = slideIntoContainer(slideDirection, animationSpec),
+                                initialContentExit = slideOutOfContainer(slideDirection, animationSpec),
+                                sizeTransform = null
+                            )
+                        },
+                        content = content,
+                        label = ""
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(78.dp))
